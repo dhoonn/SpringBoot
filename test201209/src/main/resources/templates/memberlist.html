@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">  <!-- 타임리프 사용 -->
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h2>memberlist.html</h2>
+	<table>
+		<tr>
+			<th>이메일</th>
+			<th>이름</th>
+			<th>비밀번호</th>
+		</tr>
+		<tr th:each="member: ${memberList}">
+			<td><a th:onclick=""></a></td>
+			<td><span th:text="${member.mname}"></span></td>
+			<td><span th:text="${member.mpassword}"></span></td>
+		</tr>
+	</table>
+</body>
+</html>
