@@ -9,14 +9,14 @@ import lombok.*;
 @ToString
 @NoArgsConstructor
 public class MemberDTO {
-	private int mnumber;
+	//private int mnumber;
 	private String memail;
 	private String mpassword;
 	private String mname;
 	
 	public MemberEntity toEntity() {
 		MemberEntity entity = MemberEntity.builder()
-											.mnumber(mnumber)
+											//.mnumber(mnumber)
 											.memail(memail)
 											.mpassword(mpassword)
 											.mname(mname)
@@ -25,8 +25,8 @@ public class MemberDTO {
 	}
 	
 	@Builder   //각각의 필드를 하나로 객체화하는것
-	public MemberDTO(int mnumber, String memail, String mpassword, String mname) {
-		this.mnumber = mnumber;
+	public MemberDTO(String memail, String mpassword, String mname) {
+		//this.mnumber = mnumber;
 		this.memail = memail;
 		this.mpassword = mpassword;
 		this.mname = mname;

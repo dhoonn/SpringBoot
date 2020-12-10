@@ -22,11 +22,13 @@ public class MemberEntity {
 	 */
 	
 	@Id //pk를 지정할 때 사용
-	@GeneratedValue(strategy = GenerationType.IDENTITY) //시퀀스 사용
-	private int mnumber;
-	
-	@Column(length=100, unique=true, nullable=false)
 	private String memail;
+	
+//	@GeneratedValue(strategy = GenerationType.IDENTITY) //시퀀스 사용
+//	private int mnumber;
+	
+//	@Column(length=100, unique=true, nullable=false)
+//	private String memail;
 	
 	@Column(length=100, nullable=false)
 	private String mpassword;
@@ -35,8 +37,8 @@ public class MemberEntity {
 	private String mname;
 	
 	@Builder
-	public MemberEntity(int mnumber, String memail, String mpassword, String mname) {
-		this.mnumber = mnumber;
+	public MemberEntity(String memail, String mpassword, String mname) {
+		//this.mnumber = mnumber;
 		this.memail = memail;
 		this.mpassword = mpassword;
 		this.mname = mname;
