@@ -49,6 +49,7 @@
 			<th>이름</th>
 			<th>비밀번호</th>
 			<th>상세조회</th>
+			<th>삭제</th>
 		</tr>
 		<tr th:each="member: ${memberList}">
 			<!-- <td><a th:onclick="memberView({[${member.memail}]})">[[${member.memail}]]</a></td> -->
@@ -56,6 +57,8 @@
 			<td><span th:text="${member.mname}"></span></td>
 			<td><span th:text="${member.mpassword}"></span></td>
 			<td><a th:href="@{'/member/'+${member.memail}}">조회</a></td>
+		 	<td><a th:onclick="memberDelete({[${member.memail}]})">삭제</a></td>
+		 	
 		</tr>
 	</table>
 </body>

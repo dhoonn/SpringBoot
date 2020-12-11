@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -77,5 +78,11 @@ public class MemberController {
 		MemberDTO memberView = memberService.memberView(memail);
 		model.addAttribute("MemberView", memberView);
 		return "memberView";
+	}
+	//삭제
+	@DeleteMapping("/member/{memail}")
+	public @ResponseBody String memberDelete(@PathVariable("memail") String memail) {
+		String result = memberService.memberDelete(memail);
+		return result;
 	}
 }

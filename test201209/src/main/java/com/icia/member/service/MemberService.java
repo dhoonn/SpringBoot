@@ -69,4 +69,9 @@ public class MemberService {
 				.build();
 		return memberView;
 	}
+	//삭제
+	public String memberDelete(String memail) {
+		memberRepository.deleteById(memail);
+		return "ok";
+	}
 }
