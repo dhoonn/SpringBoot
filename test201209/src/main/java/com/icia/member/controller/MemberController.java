@@ -2,12 +2,18 @@ package com.icia.member.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -84,5 +90,26 @@ public class MemberController {
 	public @ResponseBody String memberDelete(@PathVariable("memail") String memail) {
 		String result = memberService.memberDelete(memail);
 		return result;
+	}
+	//수정화면 출력
+	@GetMapping("/member/update")
+	public String memberUpdate(HttpSession session, Model model) {
+		String loginId = (String) session.getAttribute("loginId");
+		MemberDTO updateView = memberService.memberView(loginId);
+		model.addAttribute("updateView", updateView);
+		return "memberupdate";
+	}
+	//수정확인
+	@RequestMapping(value="/member/update", method= {RequestMethod.PUT, RequestMethod.POST})
+	public String memberUpdateProcess(MemberDTO member) {
+		memberService.memberJoin(member);
+		return "redirect:/member/"+member.getMemail();
+	}
+	
+	//수정확인(ajax)
+	@PutMapping("/member/update")
+	public String memberUpdateProcess1(@RequestBody MemberDTO member) {
+		memberService.memberJoin(member);
+		return "ok";
 	}
 }

@@ -14,7 +14,7 @@
 		<span th:text="${session['loginId']}"></span></p>	
 	<!-- model에 담은 값을 그대로 츌력 -->
 	<p>model : [[${loginMember}]]</p>
-	<button th:onclick="@{'/member/update'}">정보수정</button>
+	<a th:href="@{'/member/update'}">정보수정</a>
 	<!-- 관리자 회원목록 조회 -->
 	<p th:if="${loginId == 'admin'}">
 		관리자 회원목록 조회
