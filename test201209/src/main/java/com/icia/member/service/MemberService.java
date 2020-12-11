@@ -57,5 +57,16 @@ public class MemberService {
 		}
 		return memberList;
 	}
-
+	
+	//상세 조회
+	public MemberDTO memberView(String memail) {
+		Optional<MemberEntity> memberEntityWrapper = memberRepository.findById(memail);
+		MemberEntity memberEntity = memberEntityWrapper.get();
+		MemberDTO memberView = MemberDTO.builder()
+				.memail(memberEntity.getMemail())
+				.mpassword(memberEntity.getMpassword())
+				.mname(memberEntity.getMname())
+				.build();
+		return memberView;
+	}
 }

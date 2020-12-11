@@ -3,19 +3,59 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script>
+	function memberView(viewEmail){
+		$.ajax({
+			type: "post",
+			data: {"memail": viewEmail},
+			url: "/member/view",
+			success: function(result){
+				var output = "<table border='1'";
+				output += "<tr><th>이메일</th>";
+				output += "<th>이름</th></tr>";
+				output += "<tr><td>"+result.memail+"</td>";
+				output += "<td>"+result.mname+"</td></tr>";
+				output += "</table>";
+				$("#memberview").html(output);
+			}, error: function(){
+				console.log("상세조회 오류");
+			}
+		});
+	}
+	
+	function memberDelete(memail){
+			var deleteUrl = "/member/"+memail;
+		$.ajax({
+			type: "delete",
+			url: deleteUrl,
+			success: function(result){
+				if(result=="ok"){
+				location.href='/member/list';
+				} else{
+					console.log("삭제 실패");
+				}
+			}, error: function(){
+				console.log("삭제 오류");
+			}
+		});
+	}
+</script>
 </head>
 <body>
 	<h2>memberlist.html</h2>
-	<table>
+	<table border='1'>
 		<tr>
 			<th>이메일</th>
 			<th>이름</th>
 			<th>비밀번호</th>
+			<th>상세조회</th>
 		</tr>
 		<tr th:each="member: ${memberList}">
-			<td><a th:onclick=""></a></td>
+			<!-- <td><a th:onclick="memberView({[${member.memail}]})">[[${member.memail}]]</a></td> -->
+			<td><span th:text="${member.memail}"></span></td>
 			<td><span th:text="${member.mname}"></span></td>
 			<td><span th:text="${member.mpassword}"></span></td>
+			<td><a th:href="@{'/member/'+${member.memail}}">조회</a></td>
 		</tr>
 	</table>
 </body>

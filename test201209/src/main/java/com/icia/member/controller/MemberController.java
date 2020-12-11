@@ -5,7 +5,10 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.icia.member.dto.MemberDTO;
@@ -60,5 +63,19 @@ public class MemberController {
 		List<MemberDTO> memberList = memberService.memberList();
 		model.addAttribute("memberList", memberList);
 		return "memberlist";
+	}
+	
+	//상세조회(ajax)
+	@PostMapping("/member/view")
+	public @ResponseBody MemberDTO memberViewAjax(@RequestParam(value="memail") String memail) {
+		MemberDTO memberView = memberService.memberView(memail);
+		return memberView;
+	}
+	//상세조회 (Rest api)
+	@GetMapping("/member/{memail}")
+	public String memberView(@PathVariable("memail") String memail, Model model) {
+		MemberDTO memberView = memberService.memberView(memail);
+		model.addAttribute("MemberView", memberView);
+		return "memberView";
 	}
 }
